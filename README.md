@@ -20,7 +20,7 @@ In order to fully utilize https://code.ovgu.de/flheinri/tai25-team2 you will nee
 ##### 2.2 Access OVGU Gitlab:
 Now we want to head on over to https://code.ovgu.de/flheinri/tai25-team2. Log into the OVGU-Gitlab instance with your university sign-on.
 
-Afterwards click on your `Profile-Icon` in the top left corner and click on `Preferences`. From hear select `Personal Access Token` in the left drop-down menu and click on `Add new token` in the top right corner.
+Afterwards click on your `Profile-Icon` in the top left corner and click on `Preferences`. From here select `Personal Access Token` in the left drop-down menu and click on `Add new token` in the top right corner.
 
 Give the new `Token` a `Token Name` to remember the token by. The `Expiration Date` can stay the same.
 
