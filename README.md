@@ -13,6 +13,11 @@ Once installed open the editor (`VSC`) and select the `Source Control` tab on th
 ----
 #### 2. Second: Generate a Gitlab Access Token
 
+##### 2.1 Install OVGU VPN:
+
+In order to fully utilize https://code.ovgu.de/flheinri/tai25-team2 you will need to install the [OVGU VPN](https://www.urz.ovgu.de/eduvpn.html). This is required to be able to use `git` to `push` and `pull` code & changes from and to the repository we are going to setup later https://www.urz.ovgu.de/en/-p-4448.html.
+
+##### 2.2 Access OVGU Gitlab:
 Now we want to head on over to https://code.ovgu.de/flheinri/tai25-team2. Log into the OVGU-Gitlab instance with your university sign-on.
 
 Afterwards click on your `Profile-Icon` in the top left corner and click on `Preferences`. From head select `Personal Access Token` in the left drop-down menu and click on `Add new token` in the top right corner.
