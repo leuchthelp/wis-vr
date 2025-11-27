@@ -42,7 +42,7 @@ You should now be able to see all related project files.
 
 -----
 #### 4. Fourth: Open the Unity Project in Unity Hub
-Download and install [Unity Hub](https://unity.com/download). Once finished, open Unity Hub and head on over the `Projects` tab. Click on `Add` in the top right and then select `Add project from disk`. Find the location your save the repository to from the prior step and hit open. 
+Download and install [Unity Hub](https://unity.com/download). Once finished, open Unity Hub and head on over the `Projects` tab. Click on `Add` in the top right and then select `Add project from disk`. Find the location, you saved the repository to, from the prior step and hit open. 
 
 The Project should now have been loaded and the required version of Unity should be shown under the `Editor Version`.
 
