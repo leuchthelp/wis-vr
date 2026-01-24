@@ -268,22 +268,27 @@ public sealed class ColorBlindPostProcessEffectRendererFeature : ScriptableRende
                     {
                         severity = 0.0f;
                     }
-                    s_SharedPropertyBlock.SetFloat("_Severity", severity);
 
 
 
                     string convertable = severity.ToString();
                     int lower;
+                    float actual;
                     if (convertable.Length == 1)
                     {
                         lower = Convert.ToInt32(convertable.ToString());
+                        actual = 1.0f;
 
                         if (lower == 1) lower = 10;
                     }
                     else
                     {
                         lower = Convert.ToInt32(severity.ToString()[2].ToString());
+                        actual = (float) Convert.ToDecimal(severity.ToString().Remove(2, 1));
                     }
+
+                    //Debug.Log("severity: " + severity + " actual: " + actual);
+                    s_SharedPropertyBlock.SetFloat("_Severity", actual);
 
                     int upper = lower + 1;
 
