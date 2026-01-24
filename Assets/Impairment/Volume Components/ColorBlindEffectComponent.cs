@@ -3,30 +3,45 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-
+public enum ColorBlindMatrixType
+{
+    CoblisV1,
+    Machado,
+}
 public enum ColorBlindMode
 {
-    Normal = 0,
-    Protanopia = 1,
-    Protanomaly = 2,
-    Deuteranopia = 3,
-    Deuteranomaly = 4,
-    Tritanopia = 5,
-    Tritanomaly = 6,
-    Achromatopsia = 7,
-    Achromatomaly = 8,
+    Normal,
+    Protanopia,
+    Deuteranopia,
+    Tritanopia,
+    Achromatopsia,
+    Protanomaly,
+    Deuteranomaly,
+    Tritanomaly,
+    Achromatomaly,
 }
 
 [Serializable]
-    public sealed class ColorBlindModeParameter : VolumeParameter<ColorBlindMode>
-    {
-        /// <summary>
-        /// Creates a new <see cref="ColorBlindModeParameter"/> instance.
-        /// </summary>
-        /// <param name="value">The initial value to store in the parameter.</param>
-        /// <param name="overrideState">The initial override state for the parameter.</param>
-        public ColorBlindModeParameter(ColorBlindMode value, bool overrideState = false) : base(value, overrideState) { }
-    }
+public sealed class ColorBlindModeParameter : VolumeParameter<ColorBlindMode>
+{
+    /// <summary>
+    /// Creates a new <see cref="ColorBlindModeParameter"/> instance.
+    /// </summary>
+    /// <param name="value">The initial value to store in the parameter.</param>
+    /// <param name="overrideState">The initial override state for the parameter.</param>
+    public ColorBlindModeParameter(ColorBlindMode value, bool overrideState = true) : base(value, overrideState) { }
+}
+
+[Serializable]
+public sealed class ColorBlindMatrixTypeParameter : VolumeParameter<ColorBlindMatrixType>
+{
+    /// <summary>
+    /// Creates a new <see cref="ColorBlindMatrixTypeParameter"/> instance.
+    /// </summary>
+    /// <param name="value">The initial value to store in the parameter.</param>
+    /// <param name="overrideState">The initial override state for the parameter.</param>
+    public ColorBlindMatrixTypeParameter(ColorBlindMatrixType value, bool overrideState = true) : base(value, overrideState) { }
+}
 
 
 // Defines a custom Volume Override component that controls the intensity of the URP Post-processing effect on a Scriptable Renderer Feature.
@@ -58,9 +73,13 @@ public sealed class ColorBlindEffectComponent : VolumeComponent, IPostProcessCom
     [Tooltip("Enter the description for the property that is shown when hovered")]
 
     [SerializeField]
-    public ClampedFloatParameter intensity = new(1f, 0f, 1f);
+    public ClampedFloatParameter intensity = new(1f, 0f, 1f, true);
+
+    public ColorBlindMatrixTypeParameter type = new(ColorBlindMatrixType.CoblisV1);
 
     public ColorBlindModeParameter mode = new(ColorBlindMode.Normal);
+
+    public ClampedFloatParameter severity = new(1f, 0f, 1f);
 
     // Optional: Implement the IsActive() method of the IPostProcessComponent interface, and get the intensity value.
     public bool IsActive()

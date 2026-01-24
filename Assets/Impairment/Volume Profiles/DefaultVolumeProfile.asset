@@ -373,9 +373,15 @@ MonoBehaviour:
   intensity:
     m_OverrideState: 1
     m_Value: 1
+  type:
+    m_OverrideState: 1
+    m_Value: 0
   mode:
     m_OverrideState: 1
     m_Value: 0
+  severity:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-3386560400091697801
 MonoBehaviour:
   m_ObjectHideFlags: 3
