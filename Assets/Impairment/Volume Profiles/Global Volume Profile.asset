@@ -21,10 +21,10 @@ MonoBehaviour:
     m_Value: 1
   mode:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 8
   severity:
     m_OverrideState: 1
-    m_Value: 0.778
+    m_Value: 1
 --- !u!114 &-1104618168910861047
 MonoBehaviour:
   m_ObjectHideFlags: 3
