@@ -71,8 +71,6 @@ public sealed class ColorBlindEffectComponent : VolumeComponent, IPostProcessCom
     // To access the value in a script, refer to the VolumeManager API: https://docs.unity3d.com/Packages/com.unity.render-pipelines.core@latest/index.html?subfolder=/api/UnityEngine.Rendering.VolumeManager.html 
     [Header("Color Blind Effect Settings")]
     [Tooltip("Enter the description for the property that is shown when hovered")]
-
-    [SerializeField]
     public ClampedFloatParameter intensity = new(1f, 0f, 1f, true);
 
     public ColorBlindMatrixTypeParameter type = new(ColorBlindMatrixType.CoblisV1);
