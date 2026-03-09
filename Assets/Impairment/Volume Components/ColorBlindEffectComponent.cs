@@ -56,14 +56,14 @@ public sealed class ColorBlindMatrixTypeParameter : VolumeParameter<ColorBlindMa
 // Make the Volume Override active in the Universal Render Pipeline.
 [SupportedOnRenderPipeline(typeof(UniversalRenderPipelineAsset))]
 
+// Set the name of the volume component in the list in the Volume Profile.
+[DisplayInfo(name = "ColorBlindPostProcessEffect")]
+
 // Create the Volume Override by inheriting from VolumeComponent
 public sealed class ColorBlindEffectComponent : VolumeComponent, IPostProcessComponent
 {
     // Set the name of the volume component in the list in the Volume Profile.
-    public ColorBlindEffectComponent()
-    {
-        displayName = "ColorBlindPostProcessEffect";
-    }
+    public ColorBlindEffectComponent(){}
 
     // Create a property to control the intesity of the effect, with a tooltip description.
     // You can set the default value in the project-wide Graphics settings window. For more information, refer to https://docs.unity3d.com/Manual/urp/urp-global-settings.html

@@ -227,6 +227,13 @@ public sealed class ColorBlindPostProcessEffectRendererFeature : ScriptableRende
 
         #region PASS_SHARED_RENDERING_CODE
 
+        // Add a command to create the temporary color copy texture.
+        // This method is used in both the render graph system path and the Compatibility Mode path.
+        private static void ExecuteCopyColorPass(RasterCommandBuffer cmd, RTHandle sourceTexture)
+        {
+            Blitter.BlitTexture(cmd, sourceTexture, new Vector4(1, 1, 0, 0), 0.0f, false);
+        }
+
         // Add commands to render the effect.
         // This method is used in both the render graph system path and the Compatibility Mode path.
         private static void ExecuteMainPass(RasterCommandBuffer cmd, RTHandle sourceTexture, Material material)
@@ -341,9 +348,29 @@ public sealed class ColorBlindPostProcessEffectRendererFeature : ScriptableRende
             cmd.DrawProcedural(Matrix4x4.identity, material, 0, MeshTopology.Triangles, 3, 1, s_SharedPropertyBlock);
         }
 
+        // Get the texture descriptor needed to create the temporary color copy texture.
+        // This method is used in both the render graph system path and the Compatibility Mode path.
+        private static RenderTextureDescriptor GetCopyPassTextureDescriptor(RenderTextureDescriptor desc)
+        {
+            // Avoid an unnecessary multisample anti-aliasing (MSAA) resolve before the main render pass.
+            desc.msaaSamples = 1;
+
+            // Avoid copying the depth buffer, as the main pass render in this example doesn't use depth.
+            desc.depthBufferBits = (int)DepthBits.None;
+
+            return desc;
+        }
+
         #endregion
 
         #region PASS_RENDER_GRAPH_PATH
+
+        // Declare the resource the copy render pass uses.
+        // This method is used only in the render graph system path.
+        private class CopyPassData
+        {
+            public TextureHandle inputTexture;
+        }
 
         // Declare the resources the main render pass uses.
         // This method is used only in the render graph system path.
@@ -352,6 +379,11 @@ public sealed class ColorBlindPostProcessEffectRendererFeature : ScriptableRende
             public Material material;
 
             public TextureHandle inputTexture;
+        }
+
+        private static void ExecuteCopyColorPass(CopyPassData data, RasterGraphContext context)
+        {
+            ExecuteCopyColorPass(context.cmd, data.inputTexture);
         }
 
         private static void ExecuteMainPass(MainPassData data, RasterGraphContext context)
@@ -369,43 +401,41 @@ public sealed class ColorBlindPostProcessEffectRendererFeature : ScriptableRende
             UniversalCameraData cameraData = frameData.Get<UniversalCameraData>();
 
             // Sample from the current color texture.
-            using (var builder = renderGraph.AddRasterRenderPass<MainPassData>(passName, out var passData, profilingSampler))
+            using var builder = renderGraph.AddRasterRenderPass<MainPassData>(passName, out var passData, profilingSampler);
+            passData.material = m_Material;
+
+            TextureHandle destination;
+
+            // Copy cameraColor to a temporary texture, if the kSampleActiveColor property is set to true. 
+            if (kSampleActiveColor)
             {
-                passData.material = m_Material;
+                var cameraColorDesc = renderGraph.GetTextureDesc(resourcesData.cameraColor);
+                cameraColorDesc.name = "_CameraColorColorBlindPostProcessing";
+                cameraColorDesc.clearBuffer = false;
 
-                TextureHandle destination;
+                destination = renderGraph.CreateTexture(cameraColorDesc);
+                passData.inputTexture = resourcesData.cameraColor;
 
-                // Copy cameraColor to a temporary texture, if the kSampleActiveColor property is set to true. 
-                if (kSampleActiveColor)
-                {
-                    var cameraColorDesc = renderGraph.GetTextureDesc(resourcesData.cameraColor);
-                    cameraColorDesc.name = "_CameraColorColorBlindPostProcessing";
-                    cameraColorDesc.clearBuffer = false;
-
-                    destination = renderGraph.CreateTexture(cameraColorDesc);
-                    passData.inputTexture = resourcesData.cameraColor;
-
-                    // If you use framebuffer fetch in your material, use builder.SetInputAttachment to reduce GPU bandwidth usage and power consumption. 
-                    builder.UseTexture(passData.inputTexture, AccessFlags.Read);
-                }
-                else
-                {
-                    destination = resourcesData.cameraColor;
-                    passData.inputTexture = TextureHandle.nullHandle;
-                }
+                // If you use framebuffer fetch in your material, use builder.SetInputAttachment to reduce GPU bandwidth usage and power consumption. 
+                builder.UseTexture(passData.inputTexture, AccessFlags.Read);
+            }
+            else
+            {
+                destination = resourcesData.cameraColor;
+                passData.inputTexture = TextureHandle.nullHandle;
+            }
 
 
-                // Set the render graph to render to the temporary texture.
-                builder.SetRenderAttachment(destination, 0, AccessFlags.Write);
+            // Set the render graph to render to the temporary texture.
+            builder.SetRenderAttachment(destination, 0, AccessFlags.Write);
 
-                // Set the render method.
-                builder.SetRenderFunc((MainPassData data, RasterGraphContext context) => ExecuteMainPass(data, context));
+            // Set the render method.
+            builder.SetRenderFunc((MainPassData data, RasterGraphContext context) => ExecuteMainPass(data, context));
 
-                // Set cameraColor to the new temporary texture so the next render pass can use it. You don't need to blit to and from cameraColor if you use the render graph system.
-                if (kSampleActiveColor)
-                {
-                    resourcesData.cameraColor = destination;
-                }
+            // Set cameraColor to the new temporary texture so the next render pass can use it. You don't need to blit to and from cameraColor if you use the render graph system.
+            if (kSampleActiveColor)
+            {
+                resourcesData.cameraColor = destination;
             }
         }
 
