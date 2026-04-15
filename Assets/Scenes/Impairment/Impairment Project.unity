@@ -775,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121808b2a52314a6da71ce04a3886d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorBlindStateManager
-  type: 0
+  type: 1
   mode: 1
   severity: 1
   material: {fileID: 2100000, guid: 934a50a336a6343fb8bf8bc4255989f9, type: 2}
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121808b2a52314a6da71ce04a3886d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorBlindStateManager
-  type: 0
+  type: 1
   mode: 3
   severity: 1
   material: {fileID: 2100000, guid: 934a50a336a6343fb8bf8bc4255989f9, type: 2}
@@ -1753,7 +1753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1781119416
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,9 +1,9 @@
 Shader "TestColorBlindSample" {
     Properties {
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
-        _R("R", Color) = (1, 0, -0, 1)  
-        _G("G", Color) = (0, 1, 0, 1)
-        _B("B", Color) = (-0, -0, 1, 1)
+        _R("R", Vector) = (1, 0, -0, 1)  
+        _G("G", Vector) = (0, 1, 0, 1)
+        _B("B", Vector) = (-0, -0, 1, 1)
         _Severity ("Severity", Range(0.0, 1.0)) = 1.0
     }
 
@@ -34,9 +34,9 @@ Shader "TestColorBlindSample" {
 
             CBUFFER_START(UnityPerMaterial)
             float4 _BaseMap_ST;
-            half4 _R;
-            half4 _G;
-            half4 _B;
+            float4 _R;
+            float4 _G;
+            float4 _B;
             float _Severity;
             CBUFFER_END
 
@@ -53,12 +53,12 @@ Shader "TestColorBlindSample" {
                 return OUT;
             }
 
-            half4 frag (Varyings IN) : SV_Target {
+            float4 frag (Varyings IN) : SV_Target {
                 UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
                 // Set the color
-                half4 c = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
+                float4 c = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
 
-                half4 cb = half4
+                float4 cb = float4
                 (
                     c.r * _R[0] + c.g * _R[1] + c.b * _R[2],
                     c.r * _G[0] + c.g * _G[1] + c.b * _G[2],
@@ -66,7 +66,7 @@ Shader "TestColorBlindSample" {
                     1
                 );
 
-                half4 intermediate = lerp(c, cb, _Severity);
+                float4 intermediate = lerp(c, cb, _Severity);
                 return intermediate;
             }
             ENDHLSL
