@@ -2,6 +2,8 @@ Shader "AlignmentColorBlind"
 {
     Properties
     {
+        _PriorLeftTex("Prior Left", 2D) = "black" {}
+        _PriorRightTex("Prior Right", 2D) = "black" {}
         _LeftTex("Left Texture", 2D) = "black" {}
         _RightTex("Right Texture", 2D) = "black" {}
         _R("R", Vector) = (1, 0, -0, 1)  
@@ -27,7 +29,11 @@ Shader "AlignmentColorBlind"
             #pragma multi_compile_instancing
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
+            
+            TEXTURE2D(_PriorLeftTex);
+            SAMPLER(sampler_PriorLeftTex);
+            TEXTURE2D(_PriorRightTex);
+            SAMPLER(sampler_PriorRightTex);
             TEXTURE2D(_LeftTex);
             SAMPLER(sampler_LeftTex);
             TEXTURE2D(_RightTex);
@@ -150,24 +156,30 @@ Shader "AlignmentColorBlind"
                 float2 uvOffset = eyeIndex == 0 ? _LeftUvOffset : _RightUvOffset;
                 uv += uvOffset;
 
-                if (any(uv < 0.0) || any(uv > 1.0))
+                float4 c;
+                float4 intermediate;
+                if (any(uv < 0.0) || any(uv > 1.0)) 
                 {
-                    discard;
+                    c = eyeIndex == 0
+                        ? SAMPLE_TEXTURE2D(_PriorLeftTex, sampler_PriorLeftTex, IN.worldPos.xy)
+                        : SAMPLE_TEXTURE2D(_PriorRightTex, sampler_PriorRightTex, IN.worldPos.xy);
+                    
+                    intermediate = c;
+                } else 
+                {
+                    c = eyeIndex == 0
+                        ? SAMPLE_TEXTURE2D(_LeftTex, sampler_LeftTex, uv)
+                        : SAMPLE_TEXTURE2D(_RightTex, sampler_RightTex, uv);
+                    
+                    float4 cb = float4
+                    (
+                        c.r * _R[0] + c.g * _R[1] + c.b * _R[2],
+                        c.r * _G[0] + c.g * _G[1] + c.b * _G[2],
+                        c.r * _B[0] + c.g * _B[1] + c.b * _B[2],
+                        1
+                    );
+                    intermediate = lerp(c, cb, _Severity);
                 }
-
-                float4 c = eyeIndex == 0
-                    ? SAMPLE_TEXTURE2D(_LeftTex, sampler_LeftTex, uv)
-                    : SAMPLE_TEXTURE2D(_RightTex, sampler_RightTex, uv);
-
-                float4 cb = float4
-                (
-                    c.r * _R[0] + c.g * _R[1] + c.b * _R[2],
-                    c.r * _G[0] + c.g * _G[1] + c.b * _G[2],
-                    c.r * _B[0] + c.g * _B[1] + c.b * _B[2],
-                    1
-                );
-
-                float4 intermediate = lerp(c, cb, _Severity);
                 return intermediate;
             }
             ENDHLSL

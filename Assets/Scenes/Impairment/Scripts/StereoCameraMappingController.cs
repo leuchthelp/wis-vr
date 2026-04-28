@@ -18,6 +18,9 @@ public class StereoCameraMappingController : MonoBehaviour
     private static readonly int LeftTexId = Shader.PropertyToID("_LeftTex");
     private static readonly int RightTexId = Shader.PropertyToID("_RightTex");
 
+    private static readonly int PriorLeftTexId = Shader.PropertyToID("_PriorLeftTex");
+    private static readonly int PriorRightTexId = Shader.PropertyToID("_PriorRightTex");
+
     private static readonly int LeftCameraPosId = Shader.PropertyToID("_LeftCameraPos");
     private static readonly int RightCameraPosId = Shader.PropertyToID("_RightCameraPos");
     private static readonly int LeftCameraRotationMatrixId = Shader.PropertyToID("_LeftCameraRotationMatrix");
@@ -139,6 +142,7 @@ public class StereoCameraMappingController : MonoBehaviour
         UpdateEyeData(rightCameraAccess, false, material);
 
         UpdateMaterialProperties(material);
+        UpdatePriorTexture(material);
     }
 
     private void UpdateEyeData(PassthroughCameraAccess cameraAccess, bool leftEye, Material material)
@@ -162,7 +166,7 @@ public class StereoCameraMappingController : MonoBehaviour
         material.SetVector(currentResolutionId, new Vector4(currentResolution.x, currentResolution.y, 0f, 0f));
     }
 
-    void UpdateMaterialProperties(Material material)
+    private void UpdateMaterialProperties(Material material)
     {
         var current_material = material;
         Vector4 current_r = current_material.GetVector("_R");
@@ -187,6 +191,15 @@ public class StereoCameraMappingController : MonoBehaviour
         float requested_severity = severity;
         if (requested_severity != current_severity)
             current_material.SetFloat("_Severity", requested_severity);
+    }
+
+    private void UpdatePriorTexture(Material material)
+    {
+        Texture leftTex = material.GetTexture(LeftTexId);
+        Texture rightTex = material.GetTexture(RightTexId);
+
+        material.SetTexture(PriorLeftTexId, leftTex);
+        material.SetTexture(PriorRightTexId, rightTex);
     }
 
     private void ApplyCalibrationToMaterial(Material material)
