@@ -171,19 +171,19 @@ public class StereoCameraMappingController : MonoBehaviour
         Vector3 current_r = current_material.GetVector("_R");
 
         int requested_type = (int)type;
-        int requested_mode = (int)model;
-        var requested_matrix = matrixSwitch[requested_type];
+        int requested_model = (int)model;
+        var requested_matrix = matrixSwitch[requested_model];
 
         //Debug.Log("current R" + current_r + " current G: " + current_material.GetVector("_G") + " current B: " + current_material.GetVector("_B"));
-        //Debug.Log("type: " + requested_type + " mode: " + requested_mode);
-        //Debug.Log("requested R: " + requested_matrix[requested_mode, 0] + " requested G: " + requested_matrix[requested_mode, 1] + " requested B: " + requested_matrix[requested_mode, 2]);
+        Debug.Log("type: " + requested_type + " mode: " + requested_model);
+        //Debug.Log("requested R: " + requested_matrix[requested_model, 0] + " requested G: " + requested_matrix[requested_model, 1] + " requested B: " + requested_matrix[requested_model, 2]);
 
-        if (current_r != requested_matrix[requested_mode, 0])
+        if (current_r != requested_matrix[requested_type, 0])
         {
             //Debug.Log("changed");
-            current_material.SetVector("_R", requested_matrix[requested_mode, 0]);
-            current_material.SetVector("_G", requested_matrix[requested_mode, 1]);
-            current_material.SetVector("_B", requested_matrix[requested_mode, 2]);
+            current_material.SetVector("_R", requested_matrix[requested_type, 0]);
+            current_material.SetVector("_G", requested_matrix[requested_type, 1]);
+            current_material.SetVector("_B", requested_matrix[requested_type, 2]);
         }
 
         float current_severity = current_material.GetFloat("_Severity");
