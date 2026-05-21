@@ -14,3 +14,5 @@ build/
 *.blob
 Samples
 TextMesh Pro
+.venv
+site
