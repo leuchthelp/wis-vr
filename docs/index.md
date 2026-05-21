@@ -1,173 +1,59 @@
----
-icon: lucide/rocket
----
+# cvd-colored-passthrough
 
-# Get started
+For usage & installation refer to [Quickstart-Guide](quickstart.md#installation).
 
-For full documentation visit [zensical.org](https://zensical.org/docs/).
+## Introduction
 
-## Commands
+Born out of a course at OVGU was the concept of trying to utilize VR/AR for visualizing *perceptual change*. 
 
-* [`zensical new`][new] - Create a new project
-* [`zensical serve`][serve] - Start local web server
-* [`zensical build`][build] - Build your site
+As: 
 
-  [new]: https://zensical.org/docs/usage/new/
-  [serve]: https://zensical.org/docs/usage/preview/
-  [build]: https://zensical.org/docs/usage/build/
+> Virtual reality allows us to take on different perspectives and creates empathy for diverse people (age, size,
+disability, etc.). Create a suitable environment that dynamically adapts to your avatar's settings, such as height,
+color blindness, tunnel vision, poor hearing, sluggishness, etc.
 
-## Examples
+In response to the aforementioned goal of the project my group and I developed a prototype focussing primarily on visual deficiency. The environment is able to dynamically adapt to multiple models proposed over the years to try and simulate a color vision deficient experience.
 
-### Admonitions
+## Available models
 
-> Go to [documentation](https://zensical.org/docs/authoring/admonitions/)
+Models are implemented not in a complete reimplementation of a given algorithm, provided one exists, but as a set of precomputed matrices provided directly by researcher or reverse-engineering. This approach was chosen to provide a simple, but yet to be scientifically evaluated, prove of concept implementation in VR.
 
-!!! note
+Currently there a two models supported by the project:
 
-    This is a **note** admonition. Use it to provide helpful information.
+1. Machado [^1]
+2. Coblis v1 [^2]
 
-!!! warning
+For more detail on the functionally & implementation visit [Implementation](implementation.md).
 
-    This is a **warning** admonition. Be careful!
+Matrixes can be found at:
 
-### Details
+- [Machado](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html) **Only accessible through university network**
+- [Colvis v1](https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7)
 
-> Go to [documentation](https://zensical.org/docs/authoring/admonitions/#collapsible-blocks)
+Additional models for future reference will be mentioned in [Color Vision Deficiency](cvd.md#models).
 
-??? info "Click to expand for more info"
+## About the models
 
-    This content is hidden until you click to expand it.
-    Great for FAQs or long explanations.
+While Machado et al.[^1] follows an actual scientific approach, simulating the perceptual changes experienced by a color vision deficient person should their respective cones malfunction, Coblis v1 is purely based on speculative experimentation. The tools used have since been taken down by the author as they wanted to stop their flawed method from propagating the internet. [^3]
 
-## Code Blocks
+> You're right, the ColorMatrix version is very simplified, and not accurate. I created that color matrix one night (http://www.colorjack.com/labs/colormatrix/)
+and since then it's shown up many places... I should probably take that page down before it spreads more! Anyways, it gives you an idea of what it might look
+like, but for the real thing...
+>
+>
+> There are a few other methods, and no one really knows exactly what it would look like... these are all generalizations of a small sample, set against the masses.
 
-> Go to [documentation](https://zensical.org/docs/authoring/code-blocks/)
-
-``` python hl_lines="2" title="Code blocks"
-def greet(name):
-    print(f"Hello, {name}!") # (1)!
-
-greet("Python")
-```
-
-1.  > Go to [documentation](https://zensical.org/docs/authoring/code-blocks/#code-annotations)
-
-    Code annotations allow to attach notes to lines of code.
-
-Code can also be highlighted inline: `#!python print("Hello, Python!")`.
-
-## Content tabs
-
-> Go to [documentation](https://zensical.org/docs/authoring/content-tabs/)
-
-=== "Python"
-
-    ``` python
-    print("Hello from Python!")
-    ```
-
-=== "Rust"
-
-    ``` rs
-    println!("Hello from Rust!");
-    ```
-
-## Diagrams
-
-> Go to [documentation](https://zensical.org/docs/authoring/diagrams/)
-
-``` mermaid
-graph LR
-  A[Start] --> B{Error?};
-  B -->|Yes| C[Hmm...];
-  C --> D[Debug];
-  D --> B;
-  B ---->|No| E[Yay!];
-```
-
-## Footnotes
-
-> Go to [documentation](https://zensical.org/docs/authoring/footnotes/)
-
-Here's a sentence with a footnote.[^1]
-
-Hover it, to see a tooltip.
-
-[^1]: This is the footnote.
+Model concept will be covered in the [Models](cvd.md#models)-section wherever applicable.
 
 
-## Formatting
+[^1]: L. A. F. Fernandes, M. M. Oliveira and G. M. Machado, "A Physiologically-based Model for Simulation of Color Vision Deficiency" in IEEE Transactions on Visualization & Computer Graphics, vol. 15, no. 06, pp. 1291-1298, November/December 2009, doi: 10.1109/TVCG.2009.113.
+keywords: {Models of Color Vision;Color Perception;Simulation of Color Vision Deficiency;Anomalous Trichromacy;Dichromacy.}
+URL: https://doi.ieeecomputersociety.org/10.1109/TVCG.2009.113
 
-> Go to [documentation](https://zensical.org/docs/authoring/formatting/)
 
-- ==This was marked (highlight)==
-- ^^This was inserted (underline)^^
-- ~~This was deleted (strikethrough)~~
-- H~2~O
-- A^T^A
-- ++ctrl+alt+del++
 
-## Icons, Emojis
 
-> Go to [documentation](https://zensical.org/docs/authoring/icons-emojis/)
+[^2]: https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7
 
-* :sparkles: `:sparkles:`
-* :rocket: `:rocket:`
-* :tada: `:tada:`
-* :memo: `:memo:`
-* :eyes: `:eyes:`
+[^3]: https://github.com/MaPePeR/jsColorblindSimulator/blob/master/README.md
 
-## Maths
-
-> Go to [documentation](https://zensical.org/docs/authoring/math/)
-
-$$
-\cos x=\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k)!}x^{2k}
-$$
-
-!!! warning "Needs configuration"
-    Note that MathJax is included via a `script` tag on this page and is not
-    configured in the generated default configuration to avoid including it
-    in a pages that do not need it. See the documentation for details on how
-    to configure it on all your pages if they are more Maths-heavy than these
-    simple starter pages.
-
-<script id="MathJax-script" src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [["\\(", "\\)"]],
-      displayMath: [["\\[", "\\]"]],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      ignoreHtmlClass: ".*|",
-      processHtmlClass: "arithmatex"
-    }
-  };
-
-  document$.subscribe(() => {
-    MathJax.startup.output.clearCache()
-    MathJax.typesetClear()
-    MathJax.texReset()
-    MathJax.typesetPromise()
-  })
-</script>
-
-## Task Lists
-
-> Go to [documentation](https://zensical.org/docs/authoring/lists/#using-task-lists)
-
-* [x] Install Zensical
-* [x] Configure `zensical.toml`
-* [x] Write amazing documentation
-* [ ] Deploy anywhere
-
-## Tooltips
-
-> Go to [documentation](https://zensical.org/docs/authoring/tooltips/)
-
-[Hover me][example]
-
-  [example]: https://example.com "I'm a tooltip!"
