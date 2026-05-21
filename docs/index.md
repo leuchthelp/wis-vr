@@ -28,7 +28,7 @@ For more detail on the functionally & implementation visit [Implementation](impl
 Matrixes can be found at:
 
 - [Machado](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html) **Only accessible through university network**
-- [Colvis v1](https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7)
+- [Coblis v1](https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7)
 
 Additional models for future reference will be mentioned in [Color Vision Deficiency](cvd.md#models).
 
