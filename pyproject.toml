@@ -1,0 +1,10 @@
+[project]
+name = "cvd-colored-passthrough"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mkdocstrings-python>=2.0.3",
+    "zensical>=0.0.43",
+]
