@@ -4,11 +4,19 @@
 
 Color vision deficiency (CVD) affects about 8% of the male and 1% of the female population, with non-binary excluded (no data). [^1] CVD is caused by a malfunction of the photopigment within either of the three respective cones present within the human eye. This malfunction is a hereditary mutation within the human X chromosome, hence why males are predominately affected due to their XX chromosome pair.
 
-Red-green blindness, meaning the inability to distinguish both colors, is hte most common trait observed. This is due to either the red (protan) or green (deutan) cone or both being affected. With the blue (tritan) cone affected subjects confused blue & yellow, while a joined malfunction is referred to as achromatopsia. 
+Red-green blindness, meaning the inability to distinguish both colors, is hte most common trait observed. This is due to either the red (protan) or green (deutan) cone or both being affected. With the blue (tritan) cone affected subjects confused blue & yellow, while a joined malfunction is referred to as achromatopsia.
 
 All traits of CVD are thought to be largely underdiagnosed or misclassified with many individuals remaining unaware of their affliction.
 
-This project aims to bridge this gap by providing a reasonably lightweight prove-of-concept implementation on one of the most widely used and most easy accessible VR headsets out there. For more details please visit the [Implementation](implementation.md#implementation)-section.
+This project aims to bridge this gap by providing a reasonably lightweight prove-of-concept implementation on one of the most widely used and most easy accessible VR headsets out there. For more details please visit the [Implementation](implementation.md#implementation) section.
+
+## Concepts
+
+## Further reading
+
+To read more about lines of confusion, color conversion and alike, please visit [this excellent blog](https://mk.bcgsc.ca/colorblind/math.mhtml) by Martin Krzywinski.
+
+He also just recently published another [excellent blog](https://mk.bcgsc.ca/ishihara-tests-for-colour-deficiency/) about the [Ishihara test](https://en.wikipedia.org/wiki/Ishihara_test).
 
 ## Models
 

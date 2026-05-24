@@ -67,7 +67,7 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "tai25-team2.slnx",
+    "dotnet.defaultSolution": "cvd-colored-passthrough.slnx",
     "cSpell.words": [
         "Blit",
         "coblis",
