@@ -52,6 +52,18 @@ While Coblis v2 has not been implemented, it does claim to be more accurate by i
 
 ### Machado
 
+For anomalous trichromacy Machado et al. [^2] models the shift in the spectral sensitivity function of each cone according to the degree of severity of the anomaly. A shift of 20nm in the LMS color space represents a severe anomaly for protanomaly & deuteranomaly, with both L and M effectively overlapping.
+
+Simulation is achieve via a two-step approach, first the aforementioned shift with a conversion to the opponent-color space defined by Inglin and Tsou et al. [^6] and finally to RGB and back.
+
+The second step is considering Dichromacy with Machado et al. [^2] adopting the model of cone replacement. For the replacement theory the "lost" photopigment of one of the cones is substituted by another pigment instead of simply having an entirely empty or even missing cone.  However the replacement model seems less likely for tritanopia as the position within the X chromosome and amount of exons differs as apposed to protanopia and deuteranopia being effectively very close in position within the X chromosome and amount of exon. As such the Machado model is not intended to handle tritanopia.
+
+In short the model simulates three cones with two types of photopigment present for dichromacy. Since L and M-cones are sufficiently similar their respective spectral sensitivity functions can be substituted.
+
+![](static/machado.pdf.png)
+
+However as can be seen in the figure above, even the replacement model is clearly incorrect, which results from the area under the curve being sufficiently different even with their peak sensitivity being independently normalized. To solve for this inaccuracy the respectively swapped L or M-cone spectral sensitivity curve needs to be rescaled to match the shape of the replaced curve. However, even then the simulation might appear a little redish. An additional reduction in the area ratio is applied by Machado et al. [^2] to account for that.
+
 ### Future models
 
 As mentioned Brettel et al. [^5] is another approach to color vision deficiency simulation and predates Machado et al. [^2] approach. This model is a suitable candidate to be implemented in future revisions.
@@ -77,6 +89,14 @@ URL: https://doi.ieeecomputersociety.org/10.1109/TVCG.2009.113
 
 [^5]: H. Brettel, F. Viénot, and J. Mollon, "Computerized simulation of color appearance for dichromats," J. Opt. Soc. Am. A  14, 2647-2655 (1997).
 
+[^6]: Carl R. Ingling, Brian Huong-Peng Tsou,
+Orthogonal combination of the three visual channels,
+Vision Research,
+Volume 17, Issue 9,
+1977,
+Pages 1075-1082,
+ISSN 0042-6989,
+https://doi.org/10.1016/0042-6989(77)90013-X.
 
 [^9]: Xiaojie Zhao, Boyang Fu, Zhenxing Li, Chengya Lu, Qi Dai,
 Evaluating the accuracy of color vision deficiency simulation: Methodologies and a comparative analysis of current models,
