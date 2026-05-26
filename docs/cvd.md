@@ -2,7 +2,7 @@
 
 ## CVD in detail
 
-Color vision deficiency (CVD) affects about 8% of the male and 1% of the female population, with non-binary excluded (no data). [^1] CVD is caused by a malfunction of the photopigment within either of the three respective cones present within the human eye. This malfunction is a hereditary mutation within the human X chromosome, hence why males are predominately affected due to their XX chromosome pair.
+Color vision deficiency (CVD) affects about 8% of the male and 1% of the female population, with non-binary excluded (no data). [^1] CVD is caused by a malfunction of the photopigment within either of the three respective cones present within the human eye. This malfunction is a hereditary mutation within the human X chromosome, hence why males are predominately affected due to their XY chromosome pair providing no additional backup in-case of a mutation.
 
 Red-green blindness, meaning the inability to distinguish both colors, is hte most common trait observed. This is due to either the red (protan) or green (deutan) cone or both being affected. With the blue (tritan) cone affected subjects confused blue & yellow, while a joined malfunction is referred to as achromatopsia.
 
