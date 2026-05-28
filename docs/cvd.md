@@ -10,11 +10,46 @@ All traits of CVD are thought to be largely underdiagnosed or misclassified with
 
 This project aims to bridge this gap by providing a reasonably lightweight prove-of-concept implementation on one of the most widely used and most easy accessible VR headsets out there. For more details please visit the [Implementation](implementation.md#implementation) section.
 
+The overall distribution is listed as follows for overall prevalence of CVD [^1] [^7] [^8] [^9] [^10];
+
+| Population / Region  | Males (%) | Females (%) |
+|-------|-----|------------|
+| European Caucasians | 8  | 0.4   |
+| Chinese    | 4.0-6.9  | <1   |
+| Japanese  | ~4.0  | <1 |
+| Druze Arabs  | 10  | NA |
+| Aboriginal Australians  | 1.9  | NA |
+| Fijians  | 0.8  | NA |
+| DR Congolese  | 1.7  | NA |
+| Indians (Andhra Pradesh)  | 7.5  | NA |
+| Norwegians  | 9  | NA |
+| Russians  | 9.2  | NA |
+| Norther Europe / USA  | 8.0  | 0.5 |
+| Nigeria (Imo State)  | 4.7  | 1.1 |
+| India (Hyderabad)  | 1.33  | 0.25 |
+| Republic of Ireland  | 4.7  | NA |
+| South Africa (Durban)  | 2.2  | NA |
+
+
+While the actual distribution of the individual types is a little less clear  [^1] [^13];
+
+| Type | Affected Cones  | Prevalence |
+|-------|-----|------------|
+| Protanopia | L (red) absent | ~1^% males |
+| Deuteranopia | M (green) absent | ~6^% males |
+| Tritanopia | S (blue) absent | ~0.67^% males |
+| Achromatopsia | all three absent | NA |
+| Anomalous trichromacy | any impacted | males 1.17% |
+| Dichromacy | two present | males 1.59% |
+| Monochromacy | one present | males 0.36% |
+
+Currently represented in this table are the highest values found in both studies, however their individual estimates differ quite a bit. This just proves the need for better diagnostic work and population tracking for CVD.
+
 ## Concepts
 
 ### Basics
 
-Human normal color vision (also called normal trichromacy) requires three kinds of retinal photoreceptors with peak sensitivity in the large, medium and short wavelengths portions of the visible spectrum. [^2] They are referred to as L, M and S cones and each contain photopigments which respond to the specific spectral response they invoke. The sensitivity of these pigments however, can be shifted to a different band in the spectrum due to natural variations in the proteins which comprise any given photopigment.
+Human normal color vision (also called normal trichromacy) requires three kinds of retinal photoreceptors with peak sensitivity in the large, medium and short wavelengths portions of the visible spectrum. [^1] [^2] [^3] They are referred to as L, M and S cones each containing photopigments which respond to a specific spectral response being invoked. The sensitivity of these pigments however, can be shifted to a different band in the spectrum due to natural variations in the proteins which comprise any given photopigment.
 
 Whenever such a shift occurs, the human ability to perceive colors within the visible spectrum is impacted causing any of the aforementioned conditions referred to as an anomalous trichromacy. Should a photopigment cease function or be absent altogether the condition is referred to as an *opia*, i.e protanopia, deuteranopia or tritanopia.
 
@@ -24,7 +59,7 @@ Tritanopia, -anomaly stems from the S cone being impacted, with deuteran- & prot
 
 ![](static/lms.webp)
 
-There exist multiple different mathematical representations of how colors can be reconstructed and described by matching different information channels. The LMS color space for instance represents the three channels L, M, S an assigns colors by the strength of excitation measured from each channel at a given input. Due to the way the different spectra overlap it is not possible to have non-zero M with L & S being zero. Is is also not apparent how to generate a specific impulse to address a particular point in LMS due to this overlap. [^3]
+There exist multiple different mathematical representations of how colors can be reconstructed and described by matching different information channels. The LMS color space for instance represents the three channels L, M, S an assigns colors by the strength of excitation measured from each channel at a given input. Due to the way the different spectra overlap it is not possible to have non-zero M with L & S being zero. Is is also not apparent how to generate a specific impulse to address a particular point in LMS due to this overlap. [^2] [^3] [^12]
 
 Another popular color space within the breadth of RGB color spaces, which address this limitation, is sRGB.  sRGB represents colors as additive values per red, green & blue color channel, each defining 0-255 color values per channel representing a combined 16.777.216 possible colors. This combination of channel values defines how an impulse (light) is constructed.
 
@@ -66,9 +101,11 @@ However as can be seen in the figure above, even the replacement model is clearl
 
 ### Future models
 
-As mentioned Brettel et al. [^5] is another approach to color vision deficiency simulation and predates Machado et al. [^2] approach. This model is a suitable candidate to be implemented in future revisions.
+As mentioned Brettel et al. [^5] is another approach to color vision deficiency simulation and predates Machado et al. [^2] approach. This model is a suitable candidate to be implemented in future revisions. Brettel et al. [^5] represent color stimuli as vectors in a three dimensional LMS space and expresses the simulation as a projection of each stimulus onto a reduced stimulus surface.
 
-Similarly Sun et al. [^10] is a quite new approach, as opposed to Brettel & Machado, which are 29 and 17 years old respectively. They claim to have improved upon Machado work significantly.
+Similarly Sun et al. [^10] is a quite recent approach, as opposed to Brettel & Machado, which are 29 and 17 years old respectively. They claim to have improved upon Machado work significantly specifically for red-green simulation, meaning either protanopia or deuteranopia. Their model is based an the CIE 2006 physiological observer model and altering the waveforms of the anomalous L, M cones instead of maintaining them.
+
+Both models have not been integrated yet, as there are no precomputed matrices yet which this prove of concept requires and a full implementation of each algorithm has been skipped due to time constraints.
 
 ## Further reading
 
@@ -98,7 +135,21 @@ Pages 1075-1082,
 ISSN 0042-6989,
 https://doi.org/10.1016/0042-6989(77)90013-X.
 
-[^9]: Xiaojie Zhao, Boyang Fu, Zhenxing Li, Chengya Lu, Qi Dai,
+[^7]: Moudgil, T.; Arora, R.; Kaur, K. Color vision impairment in school children. In Highlights on Medicine and Medical Research; B P
+International: Bhanjipur, India, 2021; pp. 9–17.
+
+[^8]: Tan, T.; Wongsawad, W.; Hurairah, H.; Loy, M.J.; Lwin, W.W.; Rawi, N.A.M.; Sidik, M.; Grzybowski, A.; Raman, R.;
+Ruamviboonsuk, P.; et al. Colour vision restrictions for driving: An evidence-based perspective on regulations in ASEAN
+countries compared to other countries. Lancet Reg. Health Southeast Asia 2023, 14, 100171
+
+[^9]: Tang, T.; Alvaro, L.; Alvarez, J.; Maule, J.; Skelton, A.; Franklin, A.; Bosten, J. Colourspot, a novel gamified tablet-based test for
+accurate diagnosis of color vision deficiency in young children. Behav. Res. Methods 2022, 54, 1148–1160. 
+
+[^10]: Birch, J. Worldwide prevalence of red-green color deficiency. J. Opt. Soc. Am. A Opt. Image Sci. Vis. 2012, 29, 313–320.
+
+[^11]: L. Sun, S. Ma, Y. Tao, et al., “ A Physiologically-Based Simulation Model of Color Appearance for Red-Green Color Vision Deficiency,” Color Research & Application 50, no. 6 (2025): 565–576, https://doi.org/10.1002/col.22992. 
+
+[^12]: Xiaojie Zhao, Boyang Fu, Zhenxing Li, Chengya Lu, Qi Dai,
 Evaluating the accuracy of color vision deficiency simulation: Methodologies and a comparative analysis of current models,
 Optics Communications,
 Volume 587,
@@ -108,4 +159,12 @@ ISSN 0030-4018,
 https://doi.org/10.1016/j.optcom.2025.131961.
 (https://www.sciencedirect.com/science/article/pii/S0030401825004894)
 
-[^10]: L. Sun, S. Ma, Y. Tao, et al., “ A Physiologically-Based Simulation Model of Color Appearance for Red-Green Color Vision Deficiency,” Color Research & Application 50, no. 6 (2025): 565–576, https://doi.org/10.1002/col.22992. 
+[^13]: Yi Deun Jeong, Jaehyeong Cho, Yejun Son, Yeona Jo, Yesol Yim, Tae Hyeon Kim, Soeun Kim, Hanseul Cho, Masoud Rahmati, Lee Smith, Ho Geol Woo, Ja Hye Kim, Yoon Jeon Kim, Jee Myung Yang, Dong Keon Yon,
+Global Prevalence of Congenital Color Vision Deficiency among Children and Adolescents, 1932–2022,
+Ophthalmology,
+Volume 132, Issue 12,
+2025,
+Pages 1431-1444,
+ISSN 0161-6420,
+https://doi.org/10.1016/j.ophtha.2025.07.031.
+(https://www.sciencedirect.com/science/article/pii/S0161642025004658)

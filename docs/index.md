@@ -14,6 +14,10 @@ color blindness, tunnel vision, poor hearing, sluggishness, etc.
 
 In response to the aforementioned goal of the project my group and I developed a prototype focussing primarily on visual deficiency. The environment is able to dynamically adapt to multiple models proposed over the years to try and simulate a color vision deficient experience.
 
+**Note:**
+
+Any simulation of CVD is only approximate. Additionally most Meta Quest headsets are not color calibrated, neither the screens nor the cameras, which further decreases accuracy. Conversion between [color spaces](cvd.md#color-space) is not without approximation either and research is still ongoing to improve the existing models as we continue to studying the human visual system.
+
 ## Available models
 
 Models are implemented not in a complete reimplementation of a given algorithm, provided one exists, but as a set of precomputed matrices provided directly by researcher or reverse-engineering. This approach was chosen to provide a simple, but yet to be scientifically evaluated, prove of concept implementation in VR.
