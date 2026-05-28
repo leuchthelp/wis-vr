@@ -2,9 +2,9 @@
 
 ## CVD in detail
 
-Color vision deficiency (CVD) affects about 8% of the male and 1% of the female population, with non-binary excluded (no data). [^1] CVD is caused by a malfunction of the photopigment within either of the three respective cones present within the human eye. This malfunction is a hereditary mutation within the human X chromosome, hence why males are predominately affected due to their XY chromosome pair providing no additional backup in-case of a mutation.
+Color vision deficiency (CVD) affects about 8% of the male and 1% of the female population, with non-binary excluded (no data). [^1] CVD is caused by a malfunction of the photopigment within either of the three respective cones present within the human eye. This malfunction is a hereditary mutation within the human X chromosome, hence why males are predominantly affected due to their XY chromosome pair providing no additional backup in-case of a mutation.
 
-Red-green blindness, meaning the inability to distinguish both colors, is hte most common trait observed. This is due to either the red (protan) or green (deutan) cone or both being affected. With the blue (tritan) cone affected subjects confused blue & yellow, while a joined malfunction is referred to as achromatopsia.
+Red-green blindness, meaning the inability to distinguish both colors, is the most common trait observed. This is due to either the red (protan) or green (deutan) cone or both being affected. With the blue (tritan) cone affected subjects confused blue & yellow, while a joint malfunction is referred to as achromatopsia.
 
 All traits of CVD are thought to be largely underdiagnosed or misclassified with many individuals remaining unaware of their affliction.
 
@@ -49,7 +49,7 @@ Currently represented in this table are the highest values found in both studies
 
 ### Basics
 
-Human normal color vision (also called normal trichromacy) requires three kinds of retinal photoreceptors with peak sensitivity in the large, medium and short wavelengths portions of the visible spectrum. [^1] [^2] [^3] They are referred to as L, M and S cones each containing photopigments which respond to a specific spectral response being invoked. The sensitivity of these pigments however, can be shifted to a different band in the spectrum due to natural variations in the proteins which comprise any given photopigment.
+Human normal color vision (also called normal trichromacy) requires three kinds of retinal photoreceptors with peak sensitivity in the large, medium and short wavelength portions of the visible spectrum. [^1] [^2] [^3] They are referred to as L, M and S cones each containing photopigments which respond to a specific spectral response being invoked. The sensitivity of these pigments however, can be shifted to a different band in the spectrum due to natural variations in the proteins which comprise any given photopigment.
 
 Whenever such a shift occurs, the human ability to perceive colors within the visible spectrum is impacted causing any of the aforementioned conditions referred to as an anomalous trichromacy. Should a photopigment cease function or be absent altogether the condition is referred to as an *opia*, i.e protanopia, deuteranopia or tritanopia.
 
@@ -59,17 +59,17 @@ Tritanopia, -anomaly stems from the S cone being impacted, with deuteran- & prot
 
 ![](static/lms.webp)
 
-There exist multiple different mathematical representations of how colors can be reconstructed and described by matching different information channels. The LMS color space for instance represents the three channels L, M, S an assigns colors by the strength of excitation measured from each channel at a given input. Due to the way the different spectra overlap it is not possible to have non-zero M with L & S being zero. Is is also not apparent how to generate a specific impulse to address a particular point in LMS due to this overlap. [^2] [^3] [^12]
+There exist multiple different mathematical representations of how colors can be reconstructed and described by matching different information channels. The LMS color space for instance represents the three channels L, M, S and assigns colors by the strength of excitation measured from each channel at a given input. Due to the way the different spectra overlap it is not possible to have non-zero M with L & S being zero. Is is also not apparent how to generate a specific impulse to address a particular point in LMS due to this overlap. [^2] [^3] [^12]
 
-Another popular color space within the breadth of RGB color spaces, which address this limitation, is sRGB.  sRGB represents colors as additive values per red, green & blue color channel, each defining 0-255 color values per channel representing a combined 16.777.216 possible colors. This combination of channel values defines how an impulse (light) is constructed.
+Another popular color space within the breadth of RGB color spaces, which addresses this limitation, is sRGB.  sRGB represents colors as additive values per red, green & blue color channel, each defining 0-255 color values per channel representing a combined 16.777.216 possible colors. This combination of channel values defines how an impulse (light) is constructed.
 
-Transforming between different color spaces is an essential part of how color vision deficiency models work. As each color space defines coordinates to achieve a given color within each space, transformations can be defined to convert one coordinate in one color space to another coordinate in another space representing the same or an approximate color. However, the transforming relies on approximate colors more often than not and is subject to rounding errors due to limited resolution depending on the color space used, i.e. sRGB with 256 value or 8 bits of information.
+Transforming between different color spaces is an essential part of how color vision deficiency models work. As each color space defines coordinates to achieve a given color within each space, transformations can be defined to convert one coordinate in one color space to another coordinate in another space representing the same or an approximate color. However, the transform relies on approximate colors more often than not and is subject to rounding errors due to limited resolution depending on the color space used, i.e. sRGB with 256 values or 8 bits of information.
 
 ### Lines of confusion
 
 ![](static/cie.xy.all.png)
 
-As the name implies a line of confusion in the context of perceivable color is the confusion of colors by a color vision deficient person due to their inability to correctly perceive a given spectrum in the markup of that color. [^4] These color along a given line appear identical.
+As the name implies a line of confusion in the context of perceivable color is the confusion of colors by a color vision deficient person due to their inability to correctly perceive a given spectrum in the markup of that color. [^4] These colors along a given line appear identical.
 
 The following is a representation of these lines per condition:
 
@@ -81,17 +81,17 @@ For more information please visit [Designing for Color blindness](https://mk.bcg
 
 ### Coblis v1
 
-For Coblis v1 the information on how the model has been developed or functions effectively does not exist. As mentioned in [About the models](index.md#about-the-models) the model was create due to simple experimentation and related information has been taken down due to the models uncontrolled spread through the internet. Even today also all available CVD simulation apps for mobile devices implement the faulty matrices. As such the model was also implemented in this simulation to document it's heritage and provide acceptable context.
+For Coblis v1 the information on how the model has been developed or functions effectively does not exist. As mentioned in [About the models](index.md#about-the-models) the model was created due to simple experimentation and related information has been taken down due to the models uncontrolled spread through the internet. Even today most of the available CVD simulation apps for mobile devices implement the faulty matrices. As such the model was also implemented in this simulation to document its heritage and provide acceptable context.
 
 While Coblis v2 has not been implemented, it does claim to be more accurate by implementing approaches from Brettel et al. [^5] and Machado et al. [^2].
 
 ### Machado
 
-For anomalous trichromacy Machado et al. [^2] models the shift in the spectral sensitivity function of each cone according to the degree of severity of the anomaly. A shift of 20nm in the LMS color space represents a severe anomaly for protanomaly & deuteranomaly, with both L and M effectively overlapping.
+For anomalous trichromacy Machado et al. [^2] models the shift in the spectral sensitivity function of each cone according to the degree of severity of the anomaly. A shift of 20 nm in the LMS color space represents a severe anomaly for protanomaly & deuteranomaly, with both L and M effectively overlapping.
 
-Simulation is achieve via a two-step approach, first the aforementioned shift with a conversion to the opponent-color space defined by Inglin and Tsou et al. [^6] and finally to RGB and back.
+Simulation is achieved via a two-step approach, first the aforementioned shift with a conversion to the opponent-color space defined by Inglin and Tsou et al. [^6] and finally to RGB and back.
 
-The second step is considering Dichromacy with Machado et al. [^2] adopting the model of cone replacement. For the replacement theory the "lost" photopigment of one of the cones is substituted by another pigment instead of simply having an entirely empty or even missing cone.  However the replacement model seems less likely for tritanopia as the position within the X chromosome and amount of exons differs as apposed to protanopia and deuteranopia being effectively very close in position within the X chromosome and amount of exon. As such the Machado model is not intended to handle tritanopia.
+The second step is considering Dichromacy with Machado et al. [^2] adopting the model of cone replacement. For the replacement theory the "lost" photopigment of one of the cones is substituted by another pigment instead of simply having an entirely empty or even missing cone.  However the replacement model seems less likely for tritanopia as the position within the X chromosome and amount of exons differs as opposed to protanopia and deuteranopia being effectively very close in position within the X chromosome and amount of exon. As such the Machado model is not intended to handle tritanopia.
 
 In short the model simulates three cones with two types of photopigment present for dichromacy. Since L and M-cones are sufficiently similar their respective spectral sensitivity functions can be substituted.
 
@@ -101,11 +101,11 @@ However as can be seen in the figure above, even the replacement model is clearl
 
 ### Future models
 
-As mentioned Brettel et al. [^5] is another approach to color vision deficiency simulation and predates Machado et al. [^2] approach. This model is a suitable candidate to be implemented in future revisions. Brettel et al. [^5] represent color stimuli as vectors in a three dimensional LMS space and expresses the simulation as a projection of each stimulus onto a reduced stimulus surface.
+As mentioned Brettel et al. [^5] is another approach to color vision deficiency simulation and predates Machado et al. [^2] approach. This model is a suitable candidate to be implemented in future revisions. Brettel et al. [^5] represent color stimuli as vectors in a three dimensional LMS space and express the simulation as a projection of each stimulus onto a reduced stimulus surface.
 
-Similarly Sun et al. [^10] is a quite recent approach, as opposed to Brettel & Machado, which are 29 and 17 years old respectively. They claim to have improved upon Machado work significantly specifically for red-green simulation, meaning either protanopia or deuteranopia. Their model is based an the CIE 2006 physiological observer model and altering the waveforms of the anomalous L, M cones instead of maintaining them.
+Similarly Sun et al. [^10] is a quite recent approach, as opposed to Brettel & Machado, which are 29 and 17 years old respectively. They claim to have improved upon Machado work significantly specifically for red-green simulation, meaning either protanopia or deuteranopia. Their model is based on the CIE 2006 physiological observer model and alters the waveforms of the anomalous L, M cones instead of maintaining them.
 
-Both models have not been integrated yet, as there are no precomputed matrices yet which this prove of concept requires and a full implementation of each algorithm has been skipped due to time constraints.
+Both models have not been integrated yet, as there are no precomputed matrices yet which this proof-of-concept requires and a full implementation of each algorithm has been skipped due to time constraints.
 
 ## Further reading
 

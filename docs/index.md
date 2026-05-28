@@ -16,11 +16,11 @@ In response to the aforementioned goal of the project my group and I developed a
 
 **Note:**
 
-Any simulation of CVD is only approximate. Additionally most Meta Quest headsets are not color calibrated, neither the screens nor the cameras, which further decreases accuracy. Conversion between [color spaces](cvd.md#color-space) is not without approximation either and research is still ongoing to improve the existing models as we continue to studying the human visual system.
+Any simulation of CVD is only approximate. Additionally most Meta Quest headsets are not color calibrated, neither the screens nor the cameras, which further decreases accuracy. Conversion between [color spaces](cvd.md#color-space) is not without approximation either and research is still ongoing to improve the existing models as we continue to study the human visual system.
 
 ## Available models
 
-Models are implemented not in a complete reimplementation of a given algorithm, provided one exists, but as a set of precomputed matrices provided directly by researcher or reverse-engineering. This approach was chosen to provide a simple, but yet to be scientifically evaluated, prove of concept implementation in VR.
+Models are implemented not in a complete reimplementation of a given algorithm, provided one exists, but as a set of precomputed matrices provided directly by researcher or reverse-engineering. This approach was chosen to provide a simple, but yet to be scientifically evaluated, proof-of-concept implementation in VR.
 
 Currently there a two models supported by the project:
 
@@ -29,7 +29,7 @@ Currently there a two models supported by the project:
 
 For more detail on the functionally & implementation visit [Implementation](implementation.md).
 
-Matrixes can be found at:
+Matrices can be found at:
 
 - [Machado](https://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html) **Only accessible through university network**
 - [Coblis v1](https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7)
@@ -47,7 +47,7 @@ like, but for the real thing...
 >
 > There are a few other methods, and no one really knows exactly what it would look like... these are all generalizations of a small sample, set against the masses.
 
-Model concept will be covered in the [Models](cvd.md#models)-section wherever applicable.
+Model concepts will be covered in the [Models](cvd.md#models)-section wherever applicable.
 
 
 [^1]: L. A. F. Fernandes, M. M. Oliveira and G. M. Machado, "A Physiologically-based Model for Simulation of Color Vision Deficiency" in IEEE Transactions on Visualization & Computer Graphics, vol. 15, no. 06, pp. 1291-1298, November/December 2009, doi: 10.1109/TVCG.2009.113.

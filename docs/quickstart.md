@@ -8,7 +8,7 @@ Simply clone this repository
 git clone https://github.com/leuchthelp/cvd-colored-passthrough.git
 ```
 
-and add it through [Unity-Hub](https://docs.unity.com/en-us/hub/install-hub) as one of your project.
+and add it through [Unity-Hub](https://docs.unity.com/en-us/hub/install-hub) as one of your projects.
 
 Once added; download a compatible version of Unity (>=v6.4) and open the project in Unity.
 
